@@ -7,7 +7,7 @@
     <title>Password Generator</title>
     <link rel="stylesheet" href="style.css" />
   </head>
-  ​
+
   <body>
     <div class="wrapper">
       <header>
@@ -31,40 +31,134 @@
       </div>
     </div>
     <script>
-      function generatePassword() {
-        var length = 8,
-          charset =
-            "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789~!@#$%^&*()_+=";
-        retVal = "";
-        for (var i = 0, n = charset.length; i < length; ++i) {
-          password += charset.charAt(Math.floor(Math.random() * n));
-        }
-        return password;
-      }
+      var specialCharacters = [
+        "@",
+        "%",
+        "+",
+        "\\",
+        "/",
+        "'",
+        "!",
+        "#",
+        "$",
+        "^",
+        "?",
+        ":",
+        ",",
+        ")",
+        "(",
+        "}",
+        "{",
+        "]",
+        "[",
+        "~",
+        "-",
+        "_",
+        ".",
+      ];
+
+      var numericCharacters = [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+      ];
+
+      var lowerCasedCharacters = [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e",
+        "f",
+        "g",
+        "h",
+        "i",
+        "j",
+        "k",
+        "l",
+        "m",
+        "n",
+        "o",
+        "p",
+        "q",
+        "r",
+        "s",
+        "t",
+        "u",
+        "v",
+        "w",
+        "x",
+        "y",
+        "z",
+      ];
+
+      var upperCasedCharacters = [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G",
+        "H",
+        "I",
+        "J",
+        "K",
+        "L",
+        "M",
+        "N",
+        "O",
+        "P",
+        "Q",
+        "R",
+        "S",
+        "T",
+        "U",
+        "V",
+        "W",
+        "X",
+        "Y",
+        "Z",
+      ];
+
       var generateBtn = document.querySelector("#generate");
 
       function writePassword() {
-        var password = passwordPrompt();
+        var password = generatePassword();
         var passwordText = document.querySelector("#password");
+
         passwordText.value = password;
       }
-      function passwordPrompt() {
+
+      function generatePassword() {
         var length = prompt(
           "How long would you like your password to be (8 - 128 characters)?"
         );
+
         length = parseInt(length);
+
         if (isNaN(length)) {
           alert("That is not a valid number, please try again");
           return "Not a valid number";
         }
+
         if (length < 8) {
           alert("Your password is too short");
           return;
         }
+
         if (length > 128) {
           alert("Your password is too long");
           return;
         }
+
         var specialChars = confirm(
           "Click OK to confirm including special characters"
         );
@@ -77,6 +171,7 @@
         var uppercaseChars = confirm(
           "Click OK to confirm including uppercase characters"
         );
+
         if (
           !specialChars &&
           !numericChars &&
@@ -86,8 +181,29 @@
           alert("You need to select at least one!");
           return;
         }
+
+        var password = "";
+
+        for (var i = 0; i < length; i++) {
+          if (specialChars) {
+            password += getRandomValue(specialCharacters);
+          }
+          if (numericChars) {
+            password += getRandomValue(numericCharacters);
+          }
+          if (lowerCasedCharacters) {
+            password += getRandomValue(lowerCasedCharacters);
+          }
+          if (upperCasedCharacters) {
+            password += getRandomValue(upperCasedCharacters);
+          }
+        }
+        return password.slice(0, length);
       }
 
+      function getRandomValue(arr) {
+        return arr[Math.floor(Math.random() * arr.length)];
+      }
       generateBtn.addEventListener("click", writePassword);
     </script>
   </body>
