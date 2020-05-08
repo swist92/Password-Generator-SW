@@ -1,1 +1,5 @@
 # Password-Generator-SW
+
+At a minimum, your project README needs a title and a short description explaining the what, why, and how. What was your motivation? Why did you build this project? (Note: The answer is not "Because it was a homework assignment.") What problem does it solve? What did you learn? What makes your project stand out? If your project has a lot of features, consider adding a heading called "Features" and listing them here.
+
+The motivation for writing this code is to generate a strong password for the user.  Strong passwords utilize not only upper and lower case letters, but numerals and special characters, as well.  In addition, having a randomized password is much safer than having a word and numbers, especially if that password is used over and over in multiple places.  I learned that if the user requires more parameters, then the code has to match what is being asked.  This requires longer builds and writing more complex code.  The many steps in this homework made me appreciate how something as seemingly small as a password generator actually requires much more behind the scenes work than meets the eye.
